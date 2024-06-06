@@ -1,0 +1,3 @@
+include src\pytest_yorick\schema\tests.mainfile.yaml
+include src\pytest_yorick\schema\tests.subfile.yaml
+include LICENSE

@@ -1,0 +1,88 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+
+title: Pytest-Yorick
+description: "Schema for Pytest-Yorick test files"
+
+###
+
+definitions:
+
+  MessageList:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        MessageDescription:
+          type: string
+        NodeName:
+          type: string
+        HttpMessage:
+          $ref: "#/definitions/HttpMessage"
+        OtherMessage:
+          $ref: "#/definitions/OtherMessage"
+      oneOf:
+        - required:
+            - HttpMessage
+        - required:
+            - OtherMessage
+
+  MysqlList:
+    type: object
+    additionalProperties: true
+
+  HttpMessage:
+    type: object
+    required:
+      - Request
+      - Response
+    properties:
+      Request:
+        $ref: "#/definitions/Request"
+      Response:
+        $ref: "#/definitions/Response"
+
+  OtherMessage:
+    type: object
+
+  Request:
+    type: object
+    required:
+      - Method
+      - Url
+    properties:
+      Method:
+        type: string
+      Url:
+        type: string
+      RequestBody:
+        type: object
+        additionalProperties: true
+      Header:
+        type: object
+        additionalProperties: true
+
+  Response:
+    type: object
+    properties:
+      ResponseBody:
+        type: object
+        additionalProperties: true
+      StatusCode:
+        type: integer
+      Header:
+        type: object
+        additionalProperties: true
+
+###
+
+type: object
+properties:
+  MessageList:
+    $ref: "#/definitions/MessageList"
+  MysqlList:
+    $ref: "#/definitions/MysqlList"
+oneOf:
+  - required:
+      - MessageList
+  - required:
+      - MysqlList

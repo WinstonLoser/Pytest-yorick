@@ -1,0 +1,15 @@
+test-name: tc-01-demo
+description: "http test demo"
+file-list:
+  node1: "<Test-Case-Name>.http.yml"
+user-data:
+  id: 0001
+  email: user@id.com
+  pswd: qwer1234
+  token_type:
+  access_token:
+  cookie:
+test-steps:
+  - node-name: node1
+    message-id: get-demo-tc-01
+    description: "get resource from jsonplaceholder"

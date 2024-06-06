@@ -1,0 +1,71 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+
+title: Pytest-Yorick
+description: "Schema for Pytest-Yorick test files"
+
+###
+
+definitions:
+  marks:
+    type: array
+    description: Pytest marks
+    items:
+      anyOf:
+        - type: string
+        - type: object
+          additionalProperties: false
+          properties:
+            parametrize:
+              type: object
+              required:
+                - key
+                - vals
+  step-info:
+    type: object
+    required:
+      - node-name
+      - message-id
+    properties:
+      node-name:
+        type: string
+        description: Name of node to get message
+      message-id:
+        type: string
+        description: Name of message to execute
+      description:
+        type: string
+      save-cookie:
+        type: boolean
+        description: save cookie received from server if set to True
+
+###
+
+type: object
+required:
+  - test-name
+  - file-list
+  - test-steps
+properties:
+  test-name:
+    type: string
+    description: Name of test
+
+  description:
+    type: string
+
+  marks:
+    $ref: "#/definitions/marks"
+
+  file-list:
+    type: object
+    additionalProperties:
+      type: string
+
+  user-data:
+    type: object
+    additionalProperties: True
+
+  test-steps:
+    type: array
+    items:
+      $ref: "#/definitions/step-info"

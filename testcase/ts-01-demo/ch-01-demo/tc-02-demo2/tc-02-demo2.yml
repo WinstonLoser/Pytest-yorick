@@ -1,0 +1,32 @@
+test-name: tc-02-demo2
+description: "http test demo"
+marks:
+  - parametrize:
+      key:
+        - id
+        - pswd
+      vals:
+        - [ '0001','1234' ]
+        - [ '0002','abcd' ]
+  - parametrize:
+      key:
+        - userId
+      vals:
+        - 0
+        - 1
+file-list:
+  node1: "<Test-Case-Name>.http.yml"
+user-data:
+  id: "{id}"
+  email: user@id.com
+  pswd: "{pswd}"
+  token_type:
+  access_token:
+  cookie:
+test-steps:
+  - node-name: node1
+    message-id: get-demo-tc-02
+    description: "get resource from jsonplaceholder"
+  - node-name: node1
+    message-id: get-demo-2-tc-02
+    description: "get resource from jsonplaceholder"
